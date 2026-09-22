@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B1117">
+  <title>Jaque mate · historia interactiva</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- El CSS va en su propio archivo: debe estar en la MISMA carpeta y llamarse exactamente estilos.css -->
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<!--
+  HISTORIA INTERACTIVA SIN JAVASCRIPT
+  Cada escena es una <section> con su id. Los botones son enlaces (href="#id")
+  y el CSS muestra solo la escena que coincide con la dirección (:target).
+  Para agregar una escena: copia una <section>, cambia el id y enlázala desde otra.
+-->
+<body>
+  <header class="cabecera">
+    <h1 class="sr-only">Jaque mate</h1>
+    <a class="reiniciar" href="#inicio">Volver a empezar</a>
+  </header>
+
+  <main class="historia">
+    <section class="escena escena--portada" id="inicio" aria-labelledby="inicio-titulo">
+      <div class="contenido">
+        <div class="portada" aria-hidden="true">
+          <figure class="portada-imagen">
+            <img src="media/inicio.jpg" alt="Odón sale apurado por el pasillo de su casa, con el maletín en la mano.">
+          </figure>
+          <div class="duelo"><span class="rey rey--blanco">♔︎</span><span class="linea"></span><span class="rey rey--negro">♚︎</span></div>
+          <p class="portada-titulo">Jaque mate</p>
+          <p class="portada-sub">Una historia interactiva</p>
+          <p class="portada-credito">Basada en el cuento de Juan Manuel Ramírez</p>
+        </div>
+        <h2 class="titulo sr-only" id="inicio-titulo">Inicio</h2>
+        <div class="relato">
+          <p>Odón termina su horario laboral y se dirige a su casa. Camina despacio, con el cuerpo cansado y la cabeza en otra parte.</p>
+          <p>Al llegar, se siente exhausto. Deja las llaves sobre la mesa y, sin ganas de nada, decide…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#sofa">Sentarse en el sofá, ubicado en la sala de estar</a></li>
+            <li><a class="opcion" href="#bano">Irse a bañar</a></li>
+            <li><a class="opcion" href="#cocina">Cocinarse</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="sofa" aria-labelledby="sofa-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="sofa-titulo">La sala de estar</h2>
+        <div class="relato">
+          <p>Odón se acomoda en el sofá de la sala de estar. Apenas apoya la cabeza, el cuerpo se le afloja y el silencio de la casa lo envuelve.</p>
+          <p>Entonces, de la nada, tocan la puerta.</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#ignora">Lo ignora por completo</a></li>
+            <li><a class="opcion" href="#abre">Abre para ver quién es</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="ignora" aria-labelledby="ignora-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="ignora-titulo">Lo ignora por completo</h2>
+
+        <figure class="pov">
+          <div class="pov-marco">
+            <iframe src="https://www.youtube-nocookie.com/embed/AH1NEkMiq80" title="Escuchar ruidos extraños y rasguños en la puerta" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>Vista en primera persona</figcaption>
+        </figure>
+
+        <div class="relato">
+          <p>Odón no se mueve. De repente, empieza a escuchar ruidos extraños y rasguños en la puerta. Se asusta, y decide abrir para ver quién es.</p>
+          <p>Entreabre apenas y se encuentra con un cuerpo espeluznante, largo, envuelto en una túnica negra. Odón, detrás de la puerta, pregunta…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#quien_es">¿Quién es?</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="abre" aria-labelledby="abre-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="abre-titulo">Abre para ver quién es</h2>
+        <div class="relato">
+          <p>Al abrir, ve un cuerpo espeluznante, largo y envuelto en una túnica negra.</p>
+          <p>Odón, detrás de la puerta, pregunta…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#quien_es">¿Quién es?</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="quien_es" aria-labelledby="quien_es-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="quien_es-titulo">¿Quién es?</h2>
+        <div class="relato">
+          <p class="voz voz--muerte"><span class="hablante" aria-hidden="true">♚︎</span><span class="sr-only">La Muerte dice: </span>“Soy la Muerte y vengo a llevarte conmigo. Ha llegado tu hora.”</p>
+          <p>Antes de que Odón pueda reaccionar, la figura agrega:</p>
+          <p class="voz voz--muerte"><span class="hablante" aria-hidden="true">♚︎</span><span class="sr-only">La Muerte dice: </span>“Pero puedes seguir con tu vida si consigues vencerme en una partida de ajedrez. Te advierto que nadie lo ha conseguido.”</p>
+          <p>Odón escucha esas palabras y se queda inmóvil. Entiende lo que está en juego. Y decide…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#no_jugar">No jugar</a></li>
+            <li><a class="opcion" href="#agua_bendita">Agarrar un jarrón de agua bendita y tirarle para espantarlo</a></li>
+            <li><a class="opcion" href="#acepta">Aceptar jugar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--final escena--sombra" id="no_jugar" aria-labelledby="no_jugar-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="no_jugar-titulo">No jugar</h2>
+        <div class="relato">
+          <p>Odón decide no jugar. Piensa que su vida está “tirada a la basura” y que no hay otro remedio que pueda salvarlo.</p>
+          <p>Baja la mirada, se hace a un lado y deja que la Muerte cruce el umbral.</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--negro">♚︎</span></span></div>
+
+        <div class="fin">
+          <p class="fin-marca">Fin</p>
+          <p class="fin-nota">Esta historia tiene otros caminos.</p>
+        </div>
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#inicio">Volver a empezar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--final escena--sombra" id="agua_bendita" aria-labelledby="agua_bendita-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="agua_bendita-titulo">El agua bendita</h2>
+        <div class="relato">
+          <p>Odón corre hasta el jarrón de agua bendita, lo agarra y se lo arroja a la Muerte para espantarla.</p>
+          <p>El gesto solo consigue enfurecerla por completo. Un frío le cierra la garganta, el aire se le agota y la Muerte lo somete a una asfixia de la que no puede zafarse.</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--negro">♚︎</span></span></div>
+
+        <div class="fin">
+          <p class="fin-marca">Fin</p>
+          <p class="fin-nota">Esta historia tiene otros caminos.</p>
+        </div>
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#inicio">Volver a empezar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="acepta" aria-labelledby="acepta-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="acepta-titulo">Acepta jugar</h2>
+
+        <figure class="pov">
+          <div class="pov-marco">
+            <iframe src="https://www.youtube-nocookie.com/embed/89TyOmkJT4A" title="Acepta jugar" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>Vista en primera persona</figcaption>
+        </figure>
+
+        <div class="relato">
+          <p>Odón acepta el desafío. Antes de jugar, nervioso, propone tomar una copa de brandy mientras dure la partida.</p>
+          <p>La Muerte acepta la invitación y, de repente, aparece un tablero sobre la mesa ratona, con las piezas ya dispuestas, listo para…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#partida">Comenzar la partida</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="partida" aria-labelledby="partida-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="partida-titulo">La partida</h2>
+        <div class="relato">
+          <p>Las piezas avanzan bajo la luz de la sala y las copas se vacían despacio.</p>
+          <p>Luego de varias horas y de realizar varios movimientos…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#horas">Varias horas</a></li>
+            <li><a class="opcion" href="#movimientos">Varios movimientos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="horas" aria-labelledby="horas-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="horas-titulo">Varias horas</h2>
+        <div class="relato">
+          <p>Pasan las horas y Odón, cada vez más concentrado, logra cercar al rey negro. Mueve su torre y anuncia su victoria:</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#jaque_mate">¡Jaque mate!</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="jaque_mate" aria-labelledby="jaque_mate-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="jaque_mate-titulo">¡Jaque mate!</h2>
+        <div class="relato">
+          <p>En el mismo momento del festejo, la Muerte desaparece. Odón se despierta asustado y se da cuenta de que todo era “un sueño”…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#hasta_que">Hasta que…</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--final" id="hasta_que" aria-labelledby="hasta_que-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="hasta_que-titulo">Hasta que…</h2>
+
+        <figure class="escena-imagen">
+          <img src="media/hasta_que.jpg" alt="Odón, pálido, sentado frente al tablero de ajedrez con dos copas de brandy vacías sobre la mesa.">
+        </figure>
+
+        <div class="relato">
+          <p>Baja la mirada y un escalofrío le atraviesa el cuerpo. Sobre la mesa ratona hay dos copas vacías, la botella de brandy y el tablero de ajedrez con el trebejo del rey negro, vencido.</p>
+          <p>Ahora sabe que la oportunidad que le dio ese ser fue para mejorar su vida y buscarle un propósito.</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro rey--caido">♚︎</span></span></div>
+
+        <div class="fin">
+          <p class="fin-marca">Fin</p>
+          <p class="fin-nota">Esta historia tiene otros caminos.</p>
+        </div>
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#inicio">Volver a empezar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="movimientos" aria-labelledby="movimientos-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="movimientos-titulo">Varios movimientos</h2>
+        <div class="relato">
+          <p>La Muerte termina ganando. Aun estando cerca de la derrota, fue un contrincante difícil.</p>
+          <p class="voz voz--odon"><span class="hablante" aria-hidden="true">♔︎</span><span class="sr-only">Odón dice: </span>“Gracias, Muerte, por darme la última oportunidad de jugar al juego que más me entusiasmaba cuando era niño.”</p>
+          <p class="voz voz--muerte"><span class="hablante" aria-hidden="true">♚︎</span><span class="sr-only">La Muerte dice: </span>“A pesar de ganarte, me has demostrado que quieres seguir luchando por tu vida. Te voy a dar…”</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#ultima">Una última oportunidad</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--final" id="ultima" aria-labelledby="ultima-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="ultima-titulo">Una última oportunidad</h2>
+        <div class="relato">
+          <p>Odón, feliz al escuchar su respuesta, le agradece profundamente por la oportunidad.</p>
+          <p>Esa noche algo cambia en él: su filosofía de vida ya no será la misma.</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <div class="fin">
+          <p class="fin-marca">Fin</p>
+          <p class="fin-nota">Esta historia tiene otros caminos.</p>
+        </div>
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#inicio">Volver a empezar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="bano" aria-labelledby="bano-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="bano-titulo">El espejo del baño</h2>
+        <div class="relato">
+          <p>Odón se mete en el baño y abre la ducha. Mientras el vapor empaña el aire, se mira en el espejo.</p>
+          <p>Por un segundo ve una sombra detrás de él. Se da vuelta y ve a la…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#muerte_bano">Muerte</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="muerte_bano" aria-labelledby="muerte_bano-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="muerte_bano-titulo">Muerte</h2>
+        <div class="relato">
+          <p>Frente a él está la Muerte. Odón, en un impulso, le tira el pote de crema para noquearla, pero el objeto la traspasa como si fuera humo.</p>
+          <p>Al ver que nada puede tocarla, intenta correr de la situación…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#correr">Correr</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="correr" aria-labelledby="correr-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="correr-titulo">Correr</h2>
+        <div class="relato">
+          <p>Pero fue en vano. El espectro lo agarra y le dice que es la Muerte.</p>
+          <p class="voz voz--muerte"><span class="hablante" aria-hidden="true">♚︎</span><span class="sr-only">La Muerte dice: </span>“Ya llegó tu hora, señor. Lo voy a llevar a mi reino y, lamentablemente…”</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#destino">No podrás hacer nada para remediarlo</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--final escena--sombra" id="destino" aria-labelledby="destino-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="destino-titulo">El destino</h2>
+        <div class="relato">
+          <p>Odón trata de calmarse. Piensa en todo lo que ha hecho en el transcurso de su vida y se da cuenta de las tantas cosas que dejó de hacer, de todo lo que perdió por llevar una “vida productiva” y sustentarse por sí mismo.</p>
+          <p>Lamentablemente, acepta su destino.</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--negro">♚︎</span></span></div>
+
+        <div class="fin">
+          <p class="fin-marca">Fin</p>
+          <p class="fin-nota">Esta historia tiene otros caminos.</p>
+        </div>
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#inicio">Volver a empezar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="cocina" aria-labelledby="cocina-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="cocina-titulo">Cocinarse</h2>
+        <div class="relato">
+          <p>Odón se cocina una polenta con queso. El aroma llena la cocina y, por un rato, algo parece salir bien en el día.</p>
+          <p>Se sienta a la mesa y, al momento de empezar a comer…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#corte">Se corta la luz</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--oscura" id="corte" aria-labelledby="corte-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="corte-titulo">Se corta la luz</h2>
+        <div class="relato">
+          <p>Todo se apaga de golpe y la casa queda sumida en la oscuridad.</p>
+          <p>Odón se enfada y va a buscar una linterna para tener algo de luz…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#linterna">Buscar una linterna</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--oscura" id="linterna" aria-labelledby="linterna-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="linterna-titulo">Buscar una linterna</h2>
+
+        <div class="relato">
+          <p>Avanza a tientas por el pasillo. En el camino siente que alguien está detrás de él, pero no le da importancia y sigue hacia la sala de estar…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#sala_oscura">La sala de estar</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena escena--oscura" id="sala_oscura" aria-labelledby="sala_oscura-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="sala_oscura-titulo">La sala de estar</h2>
+
+        <figure class="pov">
+          <div class="pov-marco">
+            <iframe src="https://www.youtube-nocookie.com/embed/oKSZ3GjYw-0" title="La sala de estar" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <figcaption>Vista en primera persona</figcaption>
+        </figure>
+
+        <div class="relato">
+          <p>Busca en un cajón hasta que encuentra la linterna. La prende y se da vuelta.</p>
+          <p>Al iluminar la sala ve una sombra parada, y se acerca cada vez más…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#luces">Se acerca cada vez más…</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section class="escena" id="luces" aria-labelledby="luces-titulo">
+      <div class="contenido">
+        <h2 class="titulo" id="luces-titulo">Vuelve la luz</h2>
+        <div class="relato">
+          <p>Las luces de la casa se encienden de nuevo. Odón, asustado y nervioso, le pregunta a la figura quién es y a qué viene…</p>
+        </div>
+
+        <div class="separador" aria-hidden="true"><span class="reyes"><span class="rey rey--blanco">♔︎</span><span class="rey rey--negro">♚︎</span></span></div>
+
+        <nav class="opciones" aria-label="Decisiones de Odón">
+          <ul>
+            <li><a class="opcion" href="#quien_es">¿Quién es?</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

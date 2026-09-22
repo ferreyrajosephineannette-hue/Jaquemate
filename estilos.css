@@ -1,0 +1,469 @@
+/* =========================================================
+   JAQUE MATE · historia interactiva
+   Solo HTML + CSS: la escena visible se elige con :target
+   ========================================================= */
+
+/* ---------- Guía de diseño ---------- */
+:root {
+  --noche:   #0B1117;   /* fondo general */
+  --carbon:  #17191C;   /* centro de escena, botones al pasar el cursor */
+  --marfil:  #E8E1D3;   /* texto principal · rey blanco (Odón) */
+  --piedra:  #A8A39A;   /* texto secundario */
+  --oro:     #B59A62;   /* líneas, enfoque, detalles */
+  --sangre:  #7B3030;   /* la Muerte · rey negro */
+  --apagon:  #05080B;   /* escenas de corte de luz */
+
+  --fade:    0.4s;      /* transiciones: entre 0,3 y 0,5 s */
+  --letra:   14px;      /* tamaño base de letra */
+
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:  "Montserrat", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --piezas: "Noto Sans Symbols 2", "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", serif;
+
+  /* valores que cambian en las escenas oscuras */
+  --texto:  var(--marfil);
+  --tenue:  var(--piedra);
+  --borde:  rgba(232, 225, 211, 0.18);
+  --trama:  0.07;       /* opacidad del tablero: 5-10 % */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { background: var(--noche); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--noche);
+  color: var(--marfil);
+  font: 400 var(--letra) / 1.9 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  padding: max(1rem, env(safe-area-inset-top)) 1.5rem 0;
+  pointer-events: none;
+}
+
+.reiniciar {
+  pointer-events: auto;
+  color: var(--piedra);
+  font-size: 0.857em;              /* 12 px con base 14 */
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--fade), border-color var(--fade);
+}
+
+.reiniciar:hover,
+.reiniciar:focus-visible {
+  color: var(--marfil);
+  border-bottom-color: var(--oro);
+}
+
+.reiniciar:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 4px;
+}
+
+/* ---------- Escenas: solo se ve la que está en :target ---------- */
+.escena {
+  display: none;
+  position: relative;
+  isolation: isolate;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(4.5rem, 11vh, 7rem) 0 clamp(3rem, 9vh, 5rem);
+  background: radial-gradient(ellipse at 50% 42%, var(--carbon) 0%, var(--noche) 72%);
+  color: var(--texto);
+}
+
+/* Cada regla va por separado: si un navegador no entiende :has(),
+   no debe invalidar las demás. */
+.escena:target {
+  display: flex;
+  animation: aparecer var(--fade) ease-out both;
+}
+
+/* Al abrir la página sin dirección (#), se muestra el inicio */
+.historia:not(:has(.escena:target)) #inicio {
+  display: flex;
+  animation: aparecer var(--fade) ease-out both;
+}
+
+/* Tablero de ajedrez muy tenue, más visible en los bordes que en el centro */
+.escena::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--trama);
+  background: repeating-conic-gradient(var(--marfil) 0 25%, transparent 0 50%) 0 0 / 88px 88px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, transparent 24%, #000 88%);
+          mask-image: radial-gradient(ellipse at 50% 45%, transparent 24%, #000 88%);
+}
+
+/* Escenas de oscuridad: fondo casi negro y menos contraste en lo secundario */
+.escena--oscura {
+  --texto: #CFC9BB;
+  --tenue: #6B6862;
+  --borde: rgba(232, 225, 211, 0.10);
+  --trama: 0.03;
+  background: var(--apagon);
+}
+
+html:has(.escena--oscura:target),
+body:has(.escena--oscura:target) {
+  background: var(--apagon);
+}
+
+body:has(.escena--oscura:target) .reiniciar {
+  color: #5B5954;
+}
+
+/* ---------- Columna de contenido (60-70 % del ancho) ---------- */
+.contenido {
+  width: 65%;
+  max-width: 36rem;
+  text-align: center;
+}
+
+.titulo {
+  margin: 0 0 1.6rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.2vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--marfil);
+  text-wrap: balance;
+}
+
+.relato p {
+  margin: 0 0 1.15em;
+  text-wrap: pretty;
+}
+
+/* ---------- Diálogos ---------- */
+.relato .voz {
+  margin: 1.6rem 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.45;
+  color: var(--marfil);
+}
+
+.hablante {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: var(--piezas);
+  font-style: normal;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.hablante--odon    { color: var(--marfil); }
+.hablante--muerte  { color: var(--sangre); }
+
+/* ---------- Separador de ajedrez ---------- */
+.separador {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: min(100%, 18rem);
+  margin: 2.2rem auto;
+}
+
+.separador::before,
+.separador::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--oro));
+  opacity: 0.55;
+}
+
+.separador::after { transform: scaleX(-1); }
+
+.reyes {
+  display: inline-flex;
+  gap: 0.9rem;
+}
+
+.rey {
+  display: inline-block;
+  font-family: var(--piezas);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.rey--blanco { color: var(--marfil); }
+.rey--negro  { color: var(--sangre); }
+
+/* Rey negro vencido (final "Hasta que…"): cae de costado */
+.rey--caido {
+  transform-origin: 25% 95%;
+  transform: rotate(80deg) translate(0.1em, 0.12em);
+}
+
+#hasta_que:target .rey--caido,
+.historia:not(:has(.escena:target)) #hasta_que .rey--caido {
+  animation: caer 1.6s 0.9s ease-in both;
+}
+
+/* Finales tristes: la línea se tiñe del color de la Muerte */
+.escena--sombra .separador::before,
+.escena--sombra .separador::after {
+  background: linear-gradient(to right, transparent, var(--sangre));
+  opacity: 0.9;
+}
+
+/* ---------- Opciones ---------- */
+.opciones ul {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.opcion {
+  display: block;
+  padding: 0.95rem 1.25rem;
+  font: 500 var(--letra) / 1.5 var(--sans);
+  color: var(--marfil);
+  text-decoration: none;
+  background: rgba(5, 8, 11, 0.62);
+  border: 1px solid var(--borde);
+  border-radius: 2px;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  transition: border-color var(--fade), background-color var(--fade), color var(--fade);
+}
+
+.opcion:hover {
+  background: rgba(23, 25, 28, 0.92);
+  border-color: var(--oro);
+}
+
+.opcion:focus-visible {
+  background: rgba(23, 25, 28, 0.92);
+  border-color: var(--oro);
+  outline: 2px solid var(--oro);
+  outline-offset: 3px;
+}
+
+.opcion:active { background: var(--apagon); }
+
+/* ---------- Final ---------- */
+.fin { margin: 0 0 1.6rem; }
+
+.fin-marca {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  color: var(--oro);
+}
+
+.fin-nota {
+  margin: 0;
+  font-size: 0.857em;
+  color: var(--tenue);
+}
+
+/* ---------- Portada (imagen animada del inicio) ---------- */
+.portada { margin-bottom: 2.4rem; }
+
+.duelo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.duelo .rey { font-size: 2.6rem; }
+
+.duelo .linea {
+  display: block;
+  width: clamp(4rem, 18vw, 9rem);
+  height: 1px;
+  background: linear-gradient(to right, var(--marfil), var(--oro), var(--sangre));
+}
+
+#inicio:target .duelo .rey--blanco,
+.historia:not(:has(.escena:target)) #inicio .duelo .rey--blanco {
+  animation: acercar-izq 2.4s 0.2s ease-out both;
+}
+
+#inicio:target .duelo .rey--negro,
+.historia:not(:has(.escena:target)) #inicio .duelo .rey--negro {
+  animation: acercar-der 2.4s 0.2s ease-out both;
+}
+
+#inicio:target .duelo .linea,
+.historia:not(:has(.escena:target)) #inicio .duelo .linea {
+  animation: trazar 2.4s 0.2s ease-out both;
+}
+
+.portada-titulo {
+  margin: 0.7rem 0 0.5rem;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(3rem, 9vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--marfil);
+}
+
+.portada-sub {
+  margin: 0;
+  color: var(--piedra);
+  letter-spacing: 0.08em;
+}
+
+.portada-credito {
+  margin: 0.4rem 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--tenue);
+}
+
+/* ---------- Nodos audiovisuales P.O.V. (opcional) ----------
+   Se activan al quitar el comentario <figure class="pov"> del HTML */
+.pov {
+  margin: 0 0 2rem;
+  aspect-ratio: 16 / 9;
+  background: var(--apagon);
+  border: 1px solid var(--borde);
+}
+
+.pov video,
+.pov img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pov-marco {
+  width: 100%;
+  height: 100%;
+}
+
+.pov iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.pov figcaption {
+  padding: 0.6rem 0;
+  font-size: 0.857em;
+  color: var(--tenue);
+}
+
+/* ---------- Imágenes de escena (ilustraciones fijas) ---------- */
+.escena-imagen {
+  margin: 0 0 2rem;
+  border: 1px solid var(--borde);
+}
+
+.escena-imagen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.portada-imagen {
+  margin: 0 0 1.8rem;
+  border: 1px solid var(--borde);
+}
+
+.portada-imagen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: cover;
+}
+
+/* ---------- Animaciones ---------- */
+@keyframes aparecer {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes acercar-izq {
+  from { opacity: 0; transform: translateX(-2.5rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes acercar-der {
+  from { opacity: 0; transform: translateX(2.5rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes trazar {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes caer {
+  0%   { transform: rotate(0deg); }
+  55%  { transform: rotate(-7deg); }
+  100% { transform: rotate(80deg) translate(0.1em, 0.12em); }
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 640px) {
+  .contenido { width: 88%; }
+  .relato .voz { font-size: 1.35rem; }
+  .cabecera { padding-inline: 1rem; }
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
